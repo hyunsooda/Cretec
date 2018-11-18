@@ -6,7 +6,10 @@
 
 ``` bash
 you have to install node.js, redis and run before follow steps below.
-** CAUATION : I have omitted .env file written database information due to security. I will upload .env file to lms board. **
+** CAUATION : I have omitted .env file written database information due to security.
+I will upload .env file to lms board. **
+
+# To run web application you must run mysql and redis at first.
 
 
 # npm i -g pm2
