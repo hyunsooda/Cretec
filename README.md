@@ -5,7 +5,7 @@
 ## Build Setup
 
 ``` bash
-you have to install node.js before follow below steps.
+you have to install node.js before follow steps below.
 # npm i -g pm2
 for server management
 
