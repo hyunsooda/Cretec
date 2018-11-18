@@ -7,10 +7,10 @@
 ``` bash
 you have to install node.js before follow steps below.
 # npm i -g pm2
--- for server management
+for server management
 
 # npm install
--- install dependencies for our project
+install dependencies for our project
 
 # serve with hot reload at localhost:3000
 npm run server
