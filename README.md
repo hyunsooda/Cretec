@@ -1,18 +1,24 @@
-# dd
+# Cretec
 
-> dd
+> DATABASE Term Project
 
 ## Build Setup
 
 ``` bash
-# install dependencies
-npm install
+you have to install node.js before follow below steps.
+# npm i -g pm2
+for server management
 
-# serve with hot reload at localhost:8080
-npm run dev
+# npm install
+install dependencies for our project
 
-# build for production with minification
-npm run build
+# serve with hot reload at localhost:3000
+npm run server
+
+# live compile vue components.
+npm run client
 ```
 
-For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
+If you don't know how to run our project it is not problem because I will keep server is running state by date 12/31 
+You can send a mail for detail to hyunsoo7708@gmail.com
+
