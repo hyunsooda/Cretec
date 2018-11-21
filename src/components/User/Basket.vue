@@ -128,6 +128,7 @@ export default {
                     date: new Date().format('yyyy-MM-dd-hh-mm-ss')
                 }
             }).then(res => {
+                console.log(res.data);
                 if(typeof res.data === 'object') {    
                     const idx = this.items.indexOf(item);
                     alert('구매 완료');

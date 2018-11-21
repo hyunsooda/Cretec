@@ -132,6 +132,8 @@ router.post('/AddToBasket', (req, res, next) => {
 });
 
 router.post('/Buy', (req, res, next) => {
+  let delivery_company_name;
+
   connection.query(`select stock from item where id=${req.body.itemid}`, (err, result) => {
     if(err) {
       res.end('error');
@@ -150,17 +152,34 @@ router.post('/Buy', (req, res, next) => {
           return;
         }
 
-        connection.query('insert into `Order` (cust_id_FK,item_id_FK,count,shipping_date) values(' +
-                          "'"+req.body.custid+"',"+req.body.itemid+","+req.body.stock+","+"'"+req.body.date+"'"   + ')', (err, result) => {
+        connection.query('select name from delivery_company', (err, result) => {
           if(err) {
             res.end('error');
             return;
           }
-          connection.query(`select * from basket where cust_id_FK='${req.body.custid}'`, (err, result) => {
-            if(err)
+          delivery_company_name = "'"+ result[Math.floor(Math.random() * 3)].name + "'";
+          console.log(delivery_company_name);
+
+          connection.query(`update delivery_company set del_count = del_count + 1 where name=${delivery_company_name}`, (err, result) => {
+            if(err) {
               res.end('error');
-            res.json(result);
+              return;
+            }
+            connection.query('insert into `Order` (cust_id_FK,item_id_FK,count,shipping_date,delivery_company_name_FK) values(' +
+                          "'"+req.body.custid+"',"+req.body.itemid+","+req.body.stock+","+"'"+req.body.date+"',"+ delivery_company_name + ')', (err, result) => {
+              if(err) {
+                res.end('error');
+                return;
+              }
+              connection.query(`select * from basket where cust_id_FK='${req.body.custid}'`, (err, result) => {
+                if(err)
+                  res.end('error');
+                res.json(result);
+              });
+            });
           });
+
+        
         });
       });
     });
@@ -195,8 +214,8 @@ router.post('/GetPurchaseHistory', (req, res, next) => {
   console.log('select item.name,price,count,shipping_date from ' +
   '(select cust_id_FK,item_id_FK,shipping_date,count from `Order` where cust_id_FK='+"'"+req.body.custid+"') as T "+
   'join customer on customer.id=T.cust_id_FK join item on item.id=T.item_id_FK')
-  connection.query('select item.name,price,count,shipping_date from ' +
-  '(select cust_id_FK,item_id_FK,shipping_date,count from `Order` where cust_id_FK='+"'"+req.body.custid+"') as T "+
+  connection.query('select item.name,price,count,shipping_date,delivery_company_name_FK from ' +
+  '(select cust_id_FK,item_id_FK,shipping_date,count,delivery_company_name_FK from `Order` where cust_id_FK='+"'"+req.body.custid+"') as T "+
   'join customer on customer.id=T.cust_id_FK join item on item.id=T.item_id_FK', (err, result) => {
     if(err) {
       res.end('error');

@@ -45,6 +45,10 @@
                     <v-list-tile-content>구매 날짜 :</v-list-tile-content>
                     <v-list-tile-content class="align-end">{{ props.item.shipping_date }}</v-list-tile-content>
                     </v-list-tile>
+                    <v-list-tile>
+                    <v-list-tile-content>배송 업체 :</v-list-tile-content>
+                    <v-list-tile-content class="align-end">{{ props.item.delivery_company_name_FK }}</v-list-tile-content>
+                    </v-list-tile>
                 </v-list>
                 </v-card>
             </v-flex>
@@ -62,7 +66,7 @@ export default {
     data() {
         return {
             items: undefined,
-            rowsPerPageItems: [4, 8],
+            rowsPerPageItems: [4, 8, 12, 16, 20],
             pagination: {
                 rowsPerPage: 4
             }
