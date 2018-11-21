@@ -1,18 +1,30 @@
-# dd
+# Cretec
 
-> dd
+> DATABASE Term Project
 
 ## Build Setup
 
 ``` bash
-# install dependencies
-npm install
+you have to install node.js, redis and run before follow steps below.
+** CAUATION : I have omitted .env file written database information due to security.
+I will upload .env file to lms board. **
 
-# serve with hot reload at localhost:8080
-npm run dev
+# To run web application you must run mysql and redis at first.
 
-# build for production with minification
-npm run build
+
+# npm i -g pm2
+for server management
+
+# npm install
+install dependencies for our project
+
+# serve with hot reload at localhost:3000
+npm run server
+
+# live compile vue components.
+npm run client
 ```
 
-For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
+If you don't know how to run our project it is not problem because I will keep server is running state by date 12/31 
+You can send a mail for detail to hyunsoo7708@gmail.com
+
