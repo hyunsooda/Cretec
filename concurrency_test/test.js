@@ -1,8 +1,8 @@
-const DB_SERVER_PORT='3306'
-const DB_HOST='localhost'
-const DB_USER='root'
-const DB_PASSWORD='4217'
-const DB_DATABASE='testDB'
+const DB_SERVER_PORT='your port'
+const DB_HOST= 'your host'
+const DB_USER= 'your id'
+const DB_PASSWORD= 'your password'
+const DB_DATABASE= 'your database'
 const mysql = require('mysql');
 const connection = mysql.createConnection({
     host     : DB_HOST,
