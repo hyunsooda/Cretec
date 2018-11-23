@@ -134,52 +134,65 @@ router.post('/AddToBasket', (req, res, next) => {
 router.post('/Buy', (req, res, next) => {
   let delivery_company_name;
 
-  connection.query(`select stock from item where id=${req.body.itemid}`, (err, result) => {
+  connection.beginTransaction(err => {
     if(err) {
       res.end('error');
       return;
     }
-    if(result[0].stock < req.body.stock) {
-      res.end('full');
-      return;
-    }
-    connection.query(`update item set stock = stock - ${req.body.stock} where id=${req.body.itemid} `, (err, result) => {
-      if(err)
-        res.end('error');
-      connection.query(`delete from basket where cust_id_FK='${req.body.custid}' AND item_id_FK=${req.body.itemid}`, (err, result) => {
-        if(err) {
-          res.end('error');
-          return;
-        }
+    /*
+    START TRNASACTION 혹은 BEGIN으로 시작해서
+    COMMIT 사이에 있는 update,delete statement가 있을시 update,delete되는 테이블은 다른 트랜젝션에서는 COMMIT되기전까지 블럭킹된다. 
+    */
 
-        connection.query('select name from delivery_company', (err, result) => {
+    connection.query(`select stock from item where id=${req.body.itemid}`, (err, result) => {
+      if(err) {
+        res.end('error');
+        return;
+      }
+      if(result[0].stock < req.body.stock) {
+        res.end('full');
+        return;
+      }
+      connection.query(`update item set stock = stock - ${req.body.stock} where id=${req.body.itemid} `, (err, result) => {
+        if(err)
+          res.end('error');
+        connection.query(`delete from basket where cust_id_FK='${req.body.custid}' AND item_id_FK=${req.body.itemid}`, (err, result) => {
           if(err) {
             res.end('error');
             return;
           }
-          delivery_company_name = "'"+ result[Math.floor(Math.random() * 3)].name + "'";
-          console.log(delivery_company_name);
 
-          connection.query(`update delivery_company set del_count = del_count + 1 where name=${delivery_company_name}`, (err, result) => {
+          connection.query('select name from delivery_company', (err, result) => {
             if(err) {
               res.end('error');
               return;
             }
-            connection.query('insert into `Order` (cust_id_FK,item_id_FK,count,shipping_date,delivery_company_name_FK) values(' +
-                          "'"+req.body.custid+"',"+req.body.itemid+","+req.body.stock+","+"'"+req.body.date+"',"+ delivery_company_name + ')', (err, result) => {
+            delivery_company_name = "'"+ result[Math.floor(Math.random() * 3)].name + "'";
+            console.log(delivery_company_name);
+
+            connection.query(`update delivery_company set del_count = del_count + 1 where name=${delivery_company_name}`, (err, result) => {
               if(err) {
                 res.end('error');
                 return;
               }
-              connection.query(`select * from basket where cust_id_FK='${req.body.custid}'`, (err, result) => {
-                if(err)
+              connection.query('insert into `Order` (cust_id_FK,item_id_FK,count,shipping_date,delivery_company_name_FK) values(' +
+                            "'"+req.body.custid+"',"+req.body.itemid+","+req.body.stock+","+"'"+req.body.date+"',"+ delivery_company_name + ')', (err, result) => {
+                if(err) {
                   res.end('error');
-                res.json(result);
+                  return;
+                }
+                connection.query(`select * from basket where cust_id_FK='${req.body.custid}'`, (err, result) => {
+                  if(err)
+                    res.end('error');
+                  connection.commit(err => {
+                    if (err) 
+                      return connection.rollback(err => { throw err } );
+                      res.json(result);
+                  });
+                });
               });
             });
           });
-
-        
         });
       });
     });
