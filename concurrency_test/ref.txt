@@ -1,0 +1,19 @@
+START TRANSACTION;
+SELECT @A:=value FROM test WHERE id=777;
+UPDATE test SET value=@A+1 WHERE id=777;
+COMMIT;
+
+
+START TRANSACTION;
+SELECT * from test where id=777 LOCK IN SHARE MODE;
+UPDATE test SET value=value+1 where id=777;
+COMMIT;
+
+
+START TRANSACTION;
+UPDATE test SET value=value+1 where id=777;
+COMMIT;
+
+
+UPDATE test SET id=value+1 where id=777;
+delete from test where id=777;
