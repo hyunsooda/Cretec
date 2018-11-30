@@ -5,7 +5,7 @@
 ## Build Setup
 
 ``` bash
-you have to install node.js, redis and run before follow steps below.
+you have to install node.js, redis and run before following steps below.
 ** CAUATION : I have omitted .env file written database information due to security.
 I will upload .env file to lms board. **
 
@@ -25,6 +25,10 @@ npm run server
 npm run client
 ```
 
-If you don't know how to run our project it is not problem because I will keep server is running state by date 12/31 
-You can send a mail for detail to hyunsoo7708@gmail.com
+<p>If you don't know how to run our project it is not problem </p>
+<p>because I will keep server is running state by date 12/31 </p>
+<p>You can send a mail for detail to hyunsoo7708@gmail.com </p>
 
+<ul>
+  <li> SERVER: http://13.125.57.118:3000/ </li>
+</ul>
