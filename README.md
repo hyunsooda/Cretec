@@ -31,3 +31,5 @@ npm run client
 <ul>
   <li> SERVER: http://13.125.57.118:3000/ </li>
 </ul>
+
+<h3> Information of admin account is released in LMS not here. </h3>
