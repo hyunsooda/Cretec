@@ -25,8 +25,7 @@ npm run server
 npm run client
 ```
 
-<p>If you don't know how to run our project it is not problem </p>
-<p>because I will keep server is running state by date 12/31 </p>
+<p>If you don't know how to run our project it is not problem because I will keep server is running state by date 12/31 </p>
 <p>You can send a mail for detail to hyunsoo7708@gmail.com </p>
 
 <ul>
