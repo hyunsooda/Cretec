@@ -29,7 +29,7 @@ npm run client
 <p>You can send a mail for detail to hyunsoo7708@gmail.com </p>
 
 <ul>
-  <li> SERVER: http://13.125.57.118:3000/ </li>
+  <li> SERVER: </li>
 </ul>
 
 <h3> Information of admin account is released in LMS not here. </h3>
