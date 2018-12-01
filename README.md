@@ -29,7 +29,7 @@ npm run client
 <p>You can send a mail for detail to hyunsoo7708@gmail.com </p>
 
 <ul>
-  <li> SERVER: </li>
+  <li> SERVER(DOMAIN) address will be open at 12/6 </li>
 </ul>
 
 <h3> Information of admin account is released in LMS not here. </h3>
